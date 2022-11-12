@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: ["http://127.0.0.1:5500"],
+    origin: ["http://127.0.0.1:5500", "http://kuppi.s3-website-us-east-1.amazonaws.com"],
     method: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
 }));
