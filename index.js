@@ -1,22 +1,27 @@
 const express = require("express");
 const cors = require('cors');
-// const db = require("../helpers/db");
+const db = require("./db");
 
 const app = express();
 
 app.use(express.json());
 
+app.use(cors({
+    origin: ["http://127.0.0.1:5500"],
+    method: ["GET", "POST", "DELETE", "PUT"],
+    credentials: true,
+}));
+
 app.get("", async (req, res) => {
-    const cars = ["Saab", "Volvo", "BMW"];
-    // db.query("select * from Employee", (err, result) => {
-    //     if (err) {
-    //         res.json({ error: err });
-    //     } else {
-    //         db.query("insert into activity(IP,userId,userName,log) values(?,?,?,?)", [req.ip, req.user.id, req.user.username, "view all Employee"], (err, response) => { });
-    //         res.json(result);
-    //     }
-    // })
-    res.send(cars);
+    //const cars = ["Saab", "Volvo", "BMW"];
+    db.query("select name from new_table", (err, result) => {
+        if (err) {
+            res.json({ error: err });
+        } else {
+            res.json(result);
+        }
+    })
+    //res.send(cars);
 });
 
 const PORT = 5000;
